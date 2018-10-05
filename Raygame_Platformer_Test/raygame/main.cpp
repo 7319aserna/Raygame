@@ -12,6 +12,7 @@
 #include "raylib.h"
 
 #include "Player.h"
+#include "Obstacle.h"
 #include "Platform.h"
 
 #include <iostream>
@@ -21,8 +22,8 @@ int main()
 	// Initialization
 	//--------------------------------------------------------------------------------------
 
-	int screenWidth = 1920;
-	int screenHeight = 1080;
+	float screenWidth = 1920.0f;
+	float screenHeight = 1080.0f;
 
 	InitWindow(screenWidth, screenHeight, "Platformer");
 
@@ -36,7 +37,7 @@ int main()
 	playerObject.playerRectangleObject.height = 25.0f;
 	playerObject.gravityEffect = 1;
 	playerObject.speed = 222.22f;
-	playerObject.jumpHeight = 25;
+	playerObject.jumpHeight = 50;
 
 	platform platformObject[8] = {
 	{ 0.0f, 1050.0f, 250.0f, 50.0f },
@@ -48,6 +49,11 @@ int main()
 	{ 1500.0f, 1050.0f, 250.0f, 50.0f },
 	{ 1750.0f, 1050.0f, 250.0f, 50.0f },
 	};
+
+	obstacle obstacleObject;
+						// Left Point	// Right Point		   // Top Point
+	obstacleObject = { { 0.0f, 0.0f }, { screenWidth, 0.0f }, { 0.0f, screenHeight }, };
+
 	//--------------------------------------------------------------------------------------
 
 	// Main game loop
@@ -74,7 +80,6 @@ int main()
 		}
 
 		for (size_t i = 0; i < 8; i++) {
-
 			if (CheckCollisionRecs(playerObject.playerRectangleObject, platformObject[i].platformRectangleObject)) {
 				playerObject.playerRectangleObject.y -= 2.5f;
 			}
@@ -90,6 +95,8 @@ int main()
 		for (size_t i = 0; i < 8; i++) {
 			platformObject[i].draw();
 		}
+
+		obstacleObject.draw();
 
 		playerObject.draw();
 
