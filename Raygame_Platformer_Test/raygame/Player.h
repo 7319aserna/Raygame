@@ -8,9 +8,9 @@ public:
 
 	Vector2 startingPosition;
 
-	int speed;
 	int gravityEffect;
 	int jumpHeight;
+	int speed;
 
 	void update(float deltaTime);
 	void draw();

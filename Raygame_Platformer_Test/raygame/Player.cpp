@@ -3,9 +3,6 @@
 
 void player::update(float deltaTime)
 {
-	if (IsKeyDown(KEY_S)) {
-		playerRectangleObject.y += speed * deltaTime;
-	}
 	if (IsKeyDown(KEY_A)) {
 		playerRectangleObject.x -= speed * deltaTime;
 	}

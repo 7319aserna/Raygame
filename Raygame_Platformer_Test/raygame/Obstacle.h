@@ -8,7 +8,7 @@ public:
 	Vector2 rightPoint;
 	Vector2 topPoint;
 
-	//Rectangle obstacleObject;
+	Rectangle obstacleRectangleObject;
 
 	void draw();
 };

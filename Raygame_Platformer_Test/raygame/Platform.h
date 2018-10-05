@@ -8,3 +8,10 @@ public:
 
 	void draw();
 };
+
+class fanPlatform {
+public:
+	Rectangle fanPlatformRectangleObject;
+
+	void draw();
+};
