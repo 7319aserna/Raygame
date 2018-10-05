@@ -30,18 +30,23 @@ int main()
 
 	player playerObject;
 	playerObject.startingPosition = { 0, 1030 };
-	playerObject.playerRectangleObject.x = 0.0f;
-	playerObject.playerRectangleObject.y = 0.0f;
+	playerObject.playerRectangleObject.x = playerObject.startingPosition.x;
+	playerObject.playerRectangleObject.y = playerObject.startingPosition.y;
 	playerObject.playerRectangleObject.width = 25.0f;
 	playerObject.playerRectangleObject.height = 25.0f;
 	playerObject.gravityEffect = 1;
 	playerObject.speed = 222.22f;
 	playerObject.jumpHeight = 25;
 
-	platform platformObject[3] = {
-	{ 0.0f, 1050.0f, 154.0f, 30.0f },
-	{ 0.0f, 1050.0f, 504.0f, 30.0f },
-	{ 0.0f, 540.0f, 240.0f, 67.0f },
+	platform platformObject[8] = {
+	{ 0.0f, 1050.0f, 250.0f, 50.0f },
+	{ 250.0f, 1050.0f, 250.0f, 50.0f },
+	{ 500.0f, 1050.0f, 250.0f, 50.0f },
+	{ 750.0f, 1050.0f, 250.0f, 50.0f },
+	{ 1000.0f, 1050.0f, 250.0f, 50.0f },
+	{ 1250.0f, 1050.0f, 250.0f, 50.0f },
+	{ 1500.0f, 1050.0f, 250.0f, 50.0f },
+	{ 1750.0f, 1050.0f, 250.0f, 50.0f },
 	};
 	//--------------------------------------------------------------------------------------
 
@@ -53,15 +58,25 @@ int main()
 		playerObject.update(GetFrameTime());
 		playerObject.playerRectangleObject.y += playerObject.gravityEffect;
 
-		if (playerObject.playerRectangleObject.y > playerObject.startingPosition.y) {
+		if (playerObject.playerRectangleObject.x > screenWidth) {
 			playerObject.playerRectangleObject.x = playerObject.startingPosition.x;
 			playerObject.playerRectangleObject.y = playerObject.startingPosition.y;
 		}
 
-		for (size_t i = 0; i < 3; i++) {
+		if (!playerObject.playerRectangleObject.x > screenWidth) {
+			playerObject.playerRectangleObject.x = playerObject.startingPosition.x;
+			playerObject.playerRectangleObject.y = playerObject.startingPosition.y;
+		}
 
-			if (CheckCollisionRecs(playerObject.playerRectangleObject, platformObject->platformRectangleObject)) {
-				playerObject.gravityEffect -= 1;
+		if (playerObject.playerRectangleObject.y > playerObject.startingPosition.y + 5.0f) {
+			playerObject.playerRectangleObject.x = playerObject.startingPosition.x;
+			playerObject.playerRectangleObject.y = playerObject.startingPosition.y;
+		}
+
+		for (size_t i = 0; i < 8; i++) {
+
+			if (CheckCollisionRecs(playerObject.playerRectangleObject, platformObject[i].platformRectangleObject)) {
+				playerObject.playerRectangleObject.y -= 2.5f;
 			}
 		}
 		//----------------------------------------------------------------------------------
@@ -72,7 +87,7 @@ int main()
 
 		ClearBackground(RAYWHITE);
 
-		for (size_t i = 0; i < 3; i++) {
+		for (size_t i = 0; i < 8; i++) {
 			platformObject[i].draw();
 		}
 

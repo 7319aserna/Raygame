@@ -13,6 +13,7 @@ void player::update(float deltaTime)
 		playerRectangleObject.x += speed * deltaTime;
 	}
 	if (IsKeyPressed(KEY_SPACE)) {
+		playerRectangleObject.x += 10.0f;
 		playerRectangleObject.y -= jumpHeight;
 	}
 	if (IsKeyReleased(KEY_SPACE)) {
